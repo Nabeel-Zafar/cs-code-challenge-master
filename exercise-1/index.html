@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+  <html>
+
+  <head>
+      <title>Todo list App</title>
+      <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  </head>
+  <style>
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      /* width: 40%; */
+    }
+    
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      margin-bottom: 10px;
+    }
+    
+    .container {
+      padding: 2px 16px;
+    }
+
+    #demo{
+        margin: auto !important;
+        width: 40% !important;
+    }
+    </style>
+  <body>
+    <p id="demo"></p>
+      <script>
+          getAllUsersList();
+          function getAllUsersList(projectKey) {  $.ajax({
+
+
+    type : 'GET',url: 'https://5dc588200bbd050014fb8ae1.mockapi.io/assessment',
+
+    success: function(userList){
+            console.log(userList)
+            userList.map(x => {
+                $("#demo").append(`
+                <div class="card">
+                    <img src="${x.avatar}" alt="Avatar" style="width:100%">
+                    <div class="container">
+                    <h4><b>${x.name}</b></h4> 
+                    <p>ID: ${x.id} - ${new Date(x.createdAt).toLocaleDateString()}</p>
+                    <p>Created At: ${new Date(x.createdAt).toLocaleDateString()}</p>  
+                    </div>
+                </div>`);
+            })      
+            }                           });   }
+            // document.getElementById("demo").innerHTML = window.getAllUsersList();
+      </script>
+
+  </body>
+
+</html>
+
